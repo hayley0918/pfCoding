@@ -10,8 +10,8 @@
 - Take the data from db and display it with EJS
 
 ### Break down the problem again
-Creating data base with Postgres SQL
 <img src="./public/psql_tables.jpeg" width="500" height="500">
+Creating data base with Postgres SQL
 - Using given data create database and tables(schema.sql)
 - Insert give data to the tables(seed.sql)
 - Select the specific data for display(psql inner join function)
