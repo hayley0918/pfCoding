@@ -26,12 +26,11 @@
                 <input type="submit" value="Submit">
             </form>              
         </div>
-<!-- 
-        <% orders.forEach(function(order){ %>
-            <% let totalAmount = ''
-            totalAmount += (order.delivered_quantity * order.quantity).toFixed(2) %>
-            <p>Total amount: $<%= `${totalAmount}`%></p>
-        <% }); %> -->
+        <% let totalAmount = 0 %>
+        <% orders.forEach(function(order){ 
+            totalAmount += Number((order.delivered_quantity * order.quantity).toFixed(2))
+        }); %>
+        <p>Total amount: $<%= `${totalAmount.toFixed(2)}`%></p>
         <div class="order_details">
             <p>Order name</p>
             <p>Customer Company</p>

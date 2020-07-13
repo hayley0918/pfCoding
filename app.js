@@ -41,9 +41,7 @@ app.set('view-engine', 'ejs')
 //     }
 
 //     results.results = orders.slice(startIndex, endIndex)
-//     res.render('orderInfo.ejs', {
-//         orders: results.results
-//     })
+//     res.json(results)
 // })
 
 app.get('/orders', async(req, res) => {
