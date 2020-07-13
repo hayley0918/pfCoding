@@ -1,7 +1,7 @@
 # Order management
 
 ## Image
-<img src="./public/app_image.png" width="500" height="500">
+<img src="./public/app_image.png" width="700" height="500">
 
 ## Break down the problem
 - Creating data base with Postgres SQL
@@ -11,7 +11,7 @@
 
 ### Break down the problem again
 Creating data base with Postgres SQL
-<img src="./public/psql_table.jpeg" width="500" height="500">
+<img src="./public/psql_tables.jpeg" width="500" height="500">
 - Using given data create database and tables(schema.sql)
 - Insert give data to the tables(seed.sql)
 - Select the specific data for display(psql inner join function)
