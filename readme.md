@@ -11,6 +11,7 @@
 
 ### Break down the problem again
 <img src="./public/psql_tables.jpeg" width="500" height="500">
+
 Creating data base with Postgres SQL
 - Using given data create database and tables(schema.sql)
 - Insert give data to the tables(seed.sql)
