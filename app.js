@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.set('view-engine', 'ejs')
 
 // routing
+// pagination try
 // app.get('/orders', async (req,res) => {
 //     let orders = await joinTables()
 //     orders = orders.rows
@@ -44,6 +45,7 @@ app.set('view-engine', 'ejs')
 //     res.json(results)
 // })
 
+// display all the data(orders)
 app.get('/orders', async(req, res) => {
     const orders = await joinTables()
     res.render('orderInfo.ejs', {
@@ -51,6 +53,7 @@ app.get('/orders', async(req, res) => {
     })
 })
 
+// display filtered data(by product name, date range)
 app.post('/orders', async(req, res) => {
     const orders = await joinTables()
     const ordersArr = orders.rows
