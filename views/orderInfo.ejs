@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="wrapper">
+        <div class="search">
+            <img src="./searchIcon.png" alt="search icon">
+            <span>Search</span>
+            <form action="/orders" method="post"> 
+                <input type="text" name="product" placeholder="Enter product name">
+                <button type="submit">search</button>
+            </form>
+        </div>
+        <div class="date">
+            <p>Created date</p>
+            <form action="/orders" method="post">
+                <label for="start-date">Enter the start date</label>
+                <input type="date" name="startDate">
+                <label for="end-date">Enter the end date</label>
+                <input type="date" name="endDate">
+                <input type="submit" value="Submit">
+            </form>              
+        </div>
+<!-- 
+        <% orders.forEach(function(order){ %>
+            <% let totalAmount = ''
+            totalAmount += (order.delivered_quantity * order.quantity).toFixed(2) %>
+            <p>Total amount: $<%= `${totalAmount}`%></p>
+        <% }); %> -->
+        <div class="order_details">
+            <p>Order name</p>
+            <p>Customer Company</p>
+            <p>Customer name</p>
+            <p>Order date</p>
+            <p>Delivered amount</p>
+            <p>Total amount</p>
+        </div>
+        <div>
+            <% orders.forEach(function(order){ %>
+                <div class = "order-box">
+                    <div class="order-wrapper">
+                        <p><%= order.order_name %></p>
+                        <p><%= order.company_name %></p>
+                        <p><%= order.customer_name %></p>
+                        <% const monthNames = ["January", "February", "March", "April", "May", "June", 
+                        "July", "August", "September", "October", "November", "December"]
+                        const newDateFormat = new Date(order.created_at)
+                        const month = newDateFormat.getMonth()
+                        const date = newDateFormat.getDate()
+                        const hour = newDateFormat.getHours()
+                        const minute = newDateFormat.getMinutes()
+                        let a = ''
+                        if(hour>12){
+                            a = hour-12+":"+minute+"pm"
+                        }else{
+                            a = hour+":"+minute+"am"
+                        } %>
+                        <p><%= `${monthNames[month]} ${date}, ${a}`%></p>
+                        <p><%= (order.delivered_quantity * order.price_per_unit).toFixed(2) == 0.00? '-': '$'+(order.delivered_quantity * order.price_per_unit).toFixed(2) %></p>
+                        <p>$<%= (order.delivered_quantity * order.quantity).toFixed(2) %></p>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+    </div>
+</body>
+</html>
+
