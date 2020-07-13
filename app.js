@@ -14,36 +14,9 @@ app.use(bodyParser.urlencoded({extended: true}))
 app.set('view-engine', 'ejs')
 
 // routing
-// pagination try
-// app.get('/orders', async (req,res) => {
-//     let orders = await joinTables()
-//     orders = orders.rows
-
-//     const page = parseInt(req.query.page)
-//     const limit = 5
-
-//     const startIndex = (page -1) * limit
-//     const endIndex = page * limit
-
-//     const results = {}
-
-//     if(endIndex < orders.length){
-//         results.next = {
-//             page: page+1,
-//             limit: limit
-//         }
-//     }
-
-//     if(startIndex>0){
-//         results.previous = {
-//             page: page-1,
-//             limit: limit
-//         }
-//     }
-
-//     results.results = orders.slice(startIndex, endIndex)
-//     res.json(results)
-// })
+app.get('/', async(req, res) => {
+    res.json({appInfo: 'built with NodeJS, Express and Psql'})
+})
 
 // display all the data(orders)
 app.get('/orders', async(req, res) => {

@@ -28,6 +28,11 @@ Connect the db and server
 Take the data from db and display it with EJS
 - Display data using forEach function and EJS syntax
 
+### Built with
+- NodeJS
+- Express
+- EJS
+- Psql
 
 ### Working on
 pagination feature
