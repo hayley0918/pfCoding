@@ -8,6 +8,8 @@ const port = 3000
 
 const { joinTables } = require('./models/order')
 
+var productName = ''
+
 // middleware
 app.use(express.static('public'))
 app.use(bodyParser.urlencoded({extended: true}))
@@ -22,18 +24,32 @@ app.get('/', async(req, res) => {
 app.get('/orders', async(req, res) => {
     const orders = await joinTables()
 
-    const pageCount = Math.ceil(orders.rows.length / 5);
+    productName = req.query.search
+
+    if(productName){
+        filteredOrders = orders.rows.filter(elem=>{
+            if(elem.product.includes(`${productName}`)){
+                return elem
+            }
+        })
+    }else{
+        filteredOrders = orders.rows
+    }
+
+    const pageCount = Math.ceil(filteredOrders.length / 5);
     let page = parseInt(req.query.page);
+
     if (!page) { page = 1;}
     if (page > pageCount) {
         page = pageCount
     }
   
     res.render('orderInfo.ejs', {
-        orders: orders.rows,
+        orders: filteredOrders,
         page: page,
-        ordersPerPage: orders.rows.slice(page * 5 - 5, page * 5),
-        pageCount: pageCount
+        ordersPerPage: filteredOrders.slice(page * 5 - 5, page * 5),
+        pageCount: pageCount,
+        productName: productName
     })
 })
 
@@ -41,10 +57,10 @@ app.get('/orders', async(req, res) => {
 app.post('/orders', async(req, res) => {
     const orders = await joinTables()
     const ordersArr = orders.rows
-    const productName = req.body.product
+    productName = req.body.product
 
-    const startDate = new Date(req.body.startDate)
-    const endDate = new Date(req.body.endDate)
+    startDate = new Date(req.body.startDate)
+    endDate = new Date(req.body.endDate)
 
     if(productName){
         filteredOrders = ordersArr.filter(elem=>{
@@ -71,7 +87,8 @@ app.post('/orders', async(req, res) => {
         orders: filteredOrders,
         page: page,
         ordersPerPage: filteredOrders.slice(page * 5 - 5, page * 5),
-        pageCount: pageCount
+        pageCount: pageCount,
+        productName: productName
     })
 })
 
