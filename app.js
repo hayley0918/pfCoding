@@ -21,8 +21,19 @@ app.get('/', async(req, res) => {
 // display all the data(orders)
 app.get('/orders', async(req, res) => {
     const orders = await joinTables()
+
+    const pageCount = Math.ceil(orders.rows.length / 5);
+    let page = parseInt(req.query.page);
+    if (!page) { page = 1;}
+    if (page > pageCount) {
+        page = pageCount
+    }
+  
     res.render('orderInfo.ejs', {
-        orders: orders.rows
+        orders: orders.rows,
+        page: page,
+        ordersPerPage: orders.rows.slice(page * 5 - 5, page * 5),
+        pageCount: pageCount
     })
 })
 
@@ -48,8 +59,20 @@ app.post('/orders', async(req, res) => {
             }
         })
     }
-    
-    res.render('orderInfo.ejs', {orders: filteredOrders})
+
+    const pageCount = Math.ceil(filteredOrders.length / 5);
+    let page = parseInt(req.query.page);
+    if (!page) { page = 1;}
+    if (page > pageCount) {
+        page = pageCount
+    }
+
+    res.render('orderInfo.ejs', {
+        orders: filteredOrders,
+        page: page,
+        ordersPerPage: filteredOrders.slice(page * 5 - 5, page * 5),
+        pageCount: pageCount
+    })
 })
 
 app.listen(port, ()=>{

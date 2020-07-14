@@ -31,4 +31,10 @@
 .order-wrapper{
     display: grid;
     grid-template-columns: repeat(6, 1fr);
+    margin-top: 10px;
+}
+
+.pagination{
+    text-align: center;
+    margin-top: 20px;
 }
