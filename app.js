@@ -1,6 +1,5 @@
 const express = require("express")
 const bodyParser = require('body-parser')
-var pagination = require('pagination')
 
 const app = express()
 const pool = require('./db')
@@ -36,10 +35,10 @@ app.get('/orders', async(req, res) => {
         filteredOrders = orders.rows
     }
 
-    const pageCount = Math.ceil(filteredOrders.length / 5);
+    const pageCount = Math.ceil(filteredOrders.length / 5)
     let page = parseInt(req.query.page);
 
-    if (!page) { page = 1;}
+    if (!page) { page = 1 }
     if (page > pageCount) {
         page = pageCount
     }
@@ -76,9 +75,9 @@ app.post('/orders', async(req, res) => {
         })
     }
 
-    const pageCount = Math.ceil(filteredOrders.length / 5);
-    let page = parseInt(req.query.page);
-    if (!page) { page = 1;}
+    const pageCount = Math.ceil(filteredOrders.length / 5)
+    let page = parseInt(req.query.page)
+    if (!page) { page = 1 }
     if (page > pageCount) {
         page = pageCount
     }
